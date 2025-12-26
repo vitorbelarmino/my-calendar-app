@@ -1,12 +1,18 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CalendarDays, Mail, Lock, User } from "lucide-react";
+import { toast } from "react-toastify";
 
 import { registerSchema, type RegisterFormData } from "../schemas/registerSchema";
 import InputWithIcon from "../components/InputWithIcon";
+import { useAuth } from "../hooks/useAuth";
+import { showApiError } from "../utils/apiError";
 
 export default function Register() {
+  const { signUp } = useAuth();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -15,8 +21,14 @@ export default function Register() {
     resolver: yupResolver(registerSchema),
   });
 
-  const onSubmit = (data: RegisterFormData) => {
-    console.log("Register:", data);
+  const onSubmit = async (data: RegisterFormData) => {
+    try {
+      await signUp(data.name, data.email, data.password);
+      toast.success("Conta criada com sucesso!");
+      navigate("/");
+    } catch (err) {
+      showApiError(err);
+    }
   };
 
   return (

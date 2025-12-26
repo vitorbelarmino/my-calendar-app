@@ -1,12 +1,18 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CalendarDays, Mail, Lock } from "lucide-react";
+import { toast } from "react-toastify";
 
 import { loginSchema, type LoginFormData } from "../schemas/loginSchema";
 import InputWithIcon from "../components/InputWithIcon";
+import { useAuth } from "../hooks/useAuth";
+import { showApiError } from "../utils/apiError";
 
 export default function Login() {
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -15,8 +21,14 @@ export default function Login() {
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log("Login:", data);
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      await signIn(data.email, data.password);
+      toast.success("Login realizado com sucesso!");
+      navigate("/");
+    } catch (err) {
+      showApiError(err);
+    }
   };
 
   return (
