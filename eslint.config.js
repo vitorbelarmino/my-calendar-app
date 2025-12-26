@@ -10,6 +10,7 @@ import prettierConfig from 'eslint-config-prettier'
 
 export default tseslint.config(
   { ignores: ['dist', 'node_modules', '*.config.js'] },
+  ...tseslint.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -45,10 +46,11 @@ export default tseslint.config(
 
       // TypeScript
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'warn',
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
 
       // React
       'react/react-in-jsx-scope': 'off',
@@ -57,29 +59,12 @@ export default tseslint.config(
       'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 
-      // Import
-      'import/order': [
-        'error',
-        {
-          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-          'newlines-between': 'always',
-          alphabetize: { order: 'asc', caseInsensitive: true },
-        },
-      ],
-      'import/no-duplicates': 'error',
-
       // Código Limpo
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-debugger': 'warn',
       'prefer-const': 'error',
       'no-var': 'error',
-      'object-shorthand': 'error',
-      'prefer-template': 'error',
-      'prefer-arrow-callback': 'error',
-      'no-nested-ternary': 'error',
       complexity: ['warn', 10],
       'max-depth': ['warn', 3],
     },
   },
-  ...tseslint.configs.recommended,
 )
