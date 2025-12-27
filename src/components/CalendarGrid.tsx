@@ -80,7 +80,7 @@ export const CalendarGrid = ({
     <>
       <div className="p-4 sm:p-6 border-b border-gray-200">
         <div className="flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-2">
+          <div className="flex gap-2">
             <button
               onClick={onPreviousMonth}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
@@ -97,19 +97,19 @@ export const CalendarGrid = ({
             </button>
             <button
               onClick={onToday}
-              className="ml-2 px-4 py-2 text-sm font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+              className="px-4 py-2 text-sm font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
             >
               Hoje
             </button>
           </div>
 
-          <h2 className="text-xl sm:text-2xl font-semibold text-gray-900">
+          <h2 className="text-xl w-full text-center sm:w-auto order-3 sm:order-2 sm:text-2xl font-semibold text-gray-900">
             {currentMonth} {currentYear}
           </h2>
 
           <button
             onClick={onNewEvent}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 cursor-pointer"
+            className="px-4 flex py-2 order-2 sm:order-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors items-center gap-2 cursor-pointer"
           >
             <Plus className="h-4 w-4" />
             Novo Evento
