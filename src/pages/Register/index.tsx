@@ -4,10 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { CalendarDays, Mail, Lock, User } from "lucide-react";
 import { toast } from "react-toastify";
 
-import { registerSchema, type RegisterFormData } from "../schemas/registerSchema";
-import TextField from "../components/TextField";
-import { useAuth } from "../hooks/useAuth";
-import { showApiError } from "../utils/apiError";
+import { registerSchema, type RegisterFormData } from "../../schemas/registerSchema";
+import TextField from "../../components/TextField";
+import { useAuth } from "../../hooks/useAuth";
+import { showApiError } from "../../utils/apiError";
 
 export default function Register() {
   const { signUp } = useAuth();

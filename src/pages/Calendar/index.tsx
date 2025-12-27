@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { CalendarGrid } from "../components/CalendarGrid";
-import { CalendarHeader } from "../components/CalendarHeader";
-import { EventModal } from "../components/EventModal";
-import { DayEventsModal } from "../components/DayEventsModal";
-import { ConfirmDialog } from "../components/ConfirmDialog";
-import type { CalendarEvent } from "../types/event";
-import { eventsApi } from "../services/api";
-import { showApiError } from "../utils/apiError";
+import { CalendarGrid } from "./components/CalendarGrid";
+import { CalendarHeader } from "./components/CalendarHeader";
+import { EventModal } from "./components/EventModal";
+import { DayEventsModal } from "./components/DayEventsModal";
+import { ConfirmDialog } from "../../components/ConfirmDialog";
+import type { CalendarEvent } from "../../types/event";
+import { eventsApi } from "../../services/api";
+import { showApiError } from "../../utils/apiError";
 
 export default function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());

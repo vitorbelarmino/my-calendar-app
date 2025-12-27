@@ -4,10 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { CalendarDays, Mail, Lock } from "lucide-react";
 import { toast } from "react-toastify";
 
-import { loginSchema, type LoginFormData } from "../schemas/loginSchema";
-import TextField from "../components/TextField";
-import { useAuth } from "../hooks/useAuth";
-import { showApiError } from "../utils/apiError";
+import { loginSchema, type LoginFormData } from "../../schemas/loginSchema";
+import TextField from "../../components/TextField";
+import { useAuth } from "../../hooks/useAuth";
+import { showApiError } from "../../utils/apiError";
 
 export default function Login() {
   const { signIn } = useAuth();

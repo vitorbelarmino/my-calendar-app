@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Trash2 } from "lucide-react";
-import type { CalendarEvent } from "../types/event";
-import { eventColors } from "../types/event";
-import TextField from "./TextField";
-import { Button } from "./Button";
-import { eventSchema, type EventFormData } from "../schemas/eventSchema";
+import type { CalendarEvent } from "../../../types/event";
+import { eventColors } from "../../../types/event";
+import TextField from "../../../components/TextField";
+import { Button } from "../../../components/Button";
+import { eventSchema, type EventFormData } from "../../../schemas/eventSchema";
 
 interface EventModalProps {
   isOpen: boolean;

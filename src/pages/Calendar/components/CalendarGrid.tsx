@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
-import { getColorValue, type CalendarEvent } from "../types/event";
+import { getColorValue, type CalendarEvent } from "../../../types/event";
 
 interface CalendarGridProps {
   currentDate: Date;

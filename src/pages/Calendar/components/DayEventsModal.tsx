@@ -1,7 +1,7 @@
 import { X, Plus, Clock, Edit2 } from "lucide-react";
-import type { CalendarEvent } from "../types/event";
-import { getColorValue } from "../types/event";
-import { Button } from "./Button";
+import type { CalendarEvent } from "../../../types/event";
+import { getColorValue } from "../../../types/event";
+import { Button } from "../../../components/Button";
 
 interface DayEventsModalProps {
   isOpen: boolean;
