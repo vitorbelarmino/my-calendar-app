@@ -1,3 +1,8 @@
+const errorMap: Record<string, string> = {
+  "Invalid credentials": "Usuário ou senha incorretos.",
+  "User already exists": "Usuário já cadastrado.",
+  "User not found": "Usuário não encontrado.",
+};
 import { toast } from "react-toastify";
 
 interface ApiError {
@@ -18,17 +23,18 @@ export function getApiErrorMessage(error: unknown): string {
     return "Não foi possível conectar ao servidor. Verifique sua conexão.";
   }
 
+  const rawMsg = apiError.response.data?.errors?.[0] || apiError.response.data?.message || "";
+  if (errorMap[rawMsg]) return errorMap[rawMsg];
+
   if (apiError.response.status === 401) {
-    return apiError.response.data?.message || "Credenciais inválidas.";
+    return errorMap[rawMsg] || rawMsg || "Credenciais inválidas.";
   }
 
   if (apiError.response.status && apiError.response.status >= 500) {
     return "Erro no servidor. Tente novamente mais tarde.";
   }
 
-  return (
-    apiError.response.data?.errors?.[0] || apiError.response.data?.message || "Ocorreu um erro inesperado."
-  );
+  return rawMsg || "Ocorreu um erro inesperado.";
 }
 
 export function showApiError(error: unknown): void {
