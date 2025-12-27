@@ -39,16 +39,36 @@ export default function TextField({
   rows = 3,
 }: TextFieldProps) {
   const isLeft = iconPosition === "left";
-  const customRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
-  const inputProps = register ? { ...register } : { value, onChange };
+  const inputRef = useRef<HTMLInputElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  const setInputRefs = (el: HTMLInputElement | null) => {
+    if (register && typeof register.ref === "function") register.ref(el);
+    inputRef.current = el;
+  };
+  const setTextareaRefs = (el: HTMLTextAreaElement | null) => {
+    if (register && typeof register.ref === "function") register.ref(el);
+    textareaRef.current = el;
+  };
+
+  const inputProps = register
+    ? { ...register, ref: setInputRefs }
+    : { value, onChange, ref: inputRef };
+
+  const textareaProps = register
+    ? { ...register, ref: setTextareaRefs }
+    : { value, onChange, ref: textareaRef };
   useEffect(() => {
-    const element = register?.ref || customRef.current;
-    if (element && typeof element !== "function") {
+    const element = multiline ? textareaRef.current : inputRef.current;
+    if (element) {
       element.setCustomValidity(error || "");
+      if (error) {
+        element.focus();
+        element.reportValidity();
+      }
     }
-  }, [error, register?.ref]);
+  }, [error, multiline]);
 
   const sharedClassName = `w-full 
     ${Icon ? (isLeft ? "pl-10 pr-3" : "pl-3 pr-10") : "px-3"} 
@@ -73,7 +93,7 @@ export default function TextField({
           <textarea
             id={id}
             placeholder={placeholder}
-            {...inputProps}
+            {...textareaProps}
             disabled={disabled}
             required={required}
             rows={rows}
