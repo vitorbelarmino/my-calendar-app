@@ -5,7 +5,7 @@ import { CalendarDays, Mail, Lock } from "lucide-react";
 import { toast } from "react-toastify";
 
 import { loginSchema, type LoginFormData } from "../schemas/loginSchema";
-import InputWithIcon from "../components/InputWithIcon";
+import TextField from "../components/TextField";
 import { useAuth } from "../hooks/useAuth";
 import { showApiError } from "../utils/apiError";
 
@@ -30,7 +30,6 @@ export default function Login() {
       showApiError(err);
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md">
@@ -50,7 +49,7 @@ export default function Login() {
           </div>
           <div className="p-6">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              <InputWithIcon
+              <TextField
                 id="email"
                 type="email"
                 label="Email"
@@ -61,7 +60,7 @@ export default function Login() {
                 disabled={isSubmitting}
               />
 
-              <InputWithIcon
+              <TextField
                 id="password"
                 type="password"
                 label="Senha"

@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
-import type { CalendarEvent } from "../types/event";
+import { getColorValue, type CalendarEvent } from "../types/event";
 
 interface CalendarGridProps {
   currentDate: Date;
@@ -126,7 +126,7 @@ export const CalendarGrid = ({
           ))}
         </div>
 
-        <div className="grid grid-cols-7 gap-1">
+        <div className="grid grid-cols-7 border-l border-t border-gray-200">
           {days.map((date) => {
             const dayEvents = getEventsForDate(date);
             const isTodayDate = isToday(date);
@@ -137,9 +137,9 @@ export const CalendarGrid = ({
                 key={date.toISOString()}
                 onClick={() => onDayClick(date)}
                 className={`
-                  aspect-square p-1 sm:p-2 rounded-lg cursor-pointer transition-colors
-                  hover:bg-gray-100 border border-transparent
-                  ${isTodayDate ? "bg-blue-50 border-blue-500" : ""}
+                  aspect-square p-1 sm:p-2 cursor-pointer transition-colors
+                  hover:bg-gray-50 border-r border-b border-gray-200
+                  ${isTodayDate ? "bg-blue-50" : ""}
                 `}
               >
                 <div className="h-full flex flex-col">
@@ -160,7 +160,7 @@ export const CalendarGrid = ({
                           onEventClick(event);
                         }}
                         className="text-[10px] sm:text-xs px-1 py-0.5 rounded truncate text-white cursor-pointer hover:opacity-80 transition-opacity"
-                        style={{ backgroundColor: event.themeColor }}
+                        style={{ backgroundColor: getColorValue(event.themeColor) }}
                         title={event.title}
                       >
                         {event.title}

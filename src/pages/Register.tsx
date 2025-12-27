@@ -5,7 +5,7 @@ import { CalendarDays, Mail, Lock, User } from "lucide-react";
 import { toast } from "react-toastify";
 
 import { registerSchema, type RegisterFormData } from "../schemas/registerSchema";
-import InputWithIcon from "../components/InputWithIcon";
+import TextField from "../components/TextField";
 import { useAuth } from "../hooks/useAuth";
 import { showApiError } from "../utils/apiError";
 
@@ -51,8 +51,8 @@ export default function Register() {
             </p>
           </div>
           <div className="p-6">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-0">
-              <InputWithIcon
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+              <TextField
                 id="name"
                 type="text"
                 label="Nome"
@@ -63,7 +63,7 @@ export default function Register() {
                 disabled={isSubmitting}
               />
 
-              <InputWithIcon
+              <TextField
                 id="email"
                 type="email"
                 label="Email"
@@ -74,7 +74,7 @@ export default function Register() {
                 disabled={isSubmitting}
               />
 
-              <InputWithIcon
+              <TextField
                 id="password"
                 type="password"
                 label="Senha"
@@ -85,7 +85,7 @@ export default function Register() {
                 disabled={isSubmitting}
               />
 
-              <InputWithIcon
+              <TextField
                 id="confirm-password"
                 type="password"
                 label="Confirme a senha"

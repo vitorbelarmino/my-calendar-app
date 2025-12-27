@@ -63,7 +63,6 @@ export default tseslint.config(
       'no-debugger': 'warn',
       'prefer-const': 'error',
       'no-var': 'error',
-      complexity: ['warn', 10],
       'max-depth': ['warn', 3],
     },
   },

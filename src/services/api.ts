@@ -46,4 +46,20 @@ api.interceptors.response.use(
   },
 );
 
+export const eventsApi = {
+  getAll: () => api.get("/events"),
+  create: (event: {
+    title: string;
+    description: string;
+    date: string;
+    hour: string;
+    themeColor: string;
+  }) => api.post("/events", event),
+  update: (
+    id: string,
+    event: { title: string; description: string; date: string; hour: string; themeColor: string },
+  ) => api.put(`/events/${id}`, event),
+  delete: (id: string) => api.delete(`/events/${id}`),
+};
+
 export default api;
