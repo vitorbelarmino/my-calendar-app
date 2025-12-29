@@ -203,14 +203,16 @@ export default function Calendar() {
         </div>
       </main>
 
-      <EventModal
-        isOpen={showEventModal}
-        onClose={handleCloseEventModal}
-        onSave={handleSaveEvent}
-        onDelete={selectedEvent ? handleDeleteClick : undefined}
-        event={selectedEvent}
-        selectedDate={selectedDate}
-      />
+      {showEventModal && (
+        <EventModal
+          isOpen={showEventModal}
+          onClose={handleCloseEventModal}
+          onSave={handleSaveEvent}
+          onDelete={selectedEvent ? handleDeleteClick : undefined}
+          event={selectedEvent}
+          selectedDate={selectedDate}
+        />
+      )}
 
       <DayEventsModal
         isOpen={showDayEventsModal}
