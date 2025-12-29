@@ -7,6 +7,7 @@ import { eventColors } from "../../../types/event";
 import TextField from "../../../components/TextField";
 import { Button } from "../../../components/Button";
 import { eventSchema, type EventFormData } from "../../../schemas/eventSchema";
+import { formatDateLongPtBr, toDateStringISO } from "../../../utils/date";
 
 interface EventModalProps {
   isOpen: boolean;
@@ -27,12 +28,7 @@ export const EventModal = ({
 }: EventModalProps) => {
   const getInitialDate = () => {
     if (event) return event.date;
-    if (selectedDate) {
-      const year = selectedDate.getFullYear();
-      const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
-      const day = String(selectedDate.getDate()).padStart(2, "0");
-      return `${year}-${month}-${day}`;
-    }
+    if (selectedDate) return toDateStringISO(selectedDate);
     return "";
   };
 
@@ -87,16 +83,6 @@ export const EventModal = ({
     await onDelete();
   };
 
-  const formatDateDisplay = (dateStr: string) => {
-    const dateObj = new Date(dateStr + "T00:00:00");
-    return dateObj.toLocaleDateString("pt-BR", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  };
-
   if (!isOpen) return null;
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -115,7 +101,7 @@ export const EventModal = ({
           </h2>
           {selectedDate && (
             <p className="text-sm text-gray-500 capitalize">
-              {formatDateDisplay(watch("date") || "")}
+              {formatDateLongPtBr(watch("date") || "")}
             </p>
           )}
         </div>

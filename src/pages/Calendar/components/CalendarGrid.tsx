@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { getColorValue, type CalendarEvent } from "../../../types/event";
+import { toDateStringISO, isToday, isSameMonth } from "../../../utils/date";
 
 interface CalendarGridProps {
   currentDate: Date;
@@ -58,21 +59,11 @@ export const CalendarGrid = ({
   };
 
   const getEventsForDate = (date: Date) => {
-    const dateStr = date.toISOString().split("T")[0];
+    const dateStr = toDateStringISO(date);
     return events.filter((event) => event.date === dateStr);
   };
 
-  const isToday = (date: Date) => {
-    return (
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear()
-    );
-  };
-
-  const isCurrentMonth = (date: Date) => {
-    return date.getMonth() === currentDate.getMonth();
-  };
+  const isCurrentMonth = (date: Date) => isSameMonth(date, currentDate);
 
   const days = getDaysInMonth(currentDate);
 

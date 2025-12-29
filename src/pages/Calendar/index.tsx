@@ -7,6 +7,7 @@ import { ConfirmDialog } from "../../components/ConfirmDialog";
 import type { CalendarEvent } from "../../types/event";
 import { eventsApi } from "../../services/api";
 import { showApiError } from "../../utils/apiError";
+import { toDateStringISO } from "../../utils/date";
 
 export default function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -62,7 +63,7 @@ export default function Calendar() {
   };
 
   const handleDayClick = (date: Date) => {
-    const dateStr = date.toISOString().split("T")[0];
+    const dateStr = toDateStringISO(date);
     const dayEvents = events.filter((event) => event.date === dateStr);
 
     setSelectedDate(date);
@@ -217,7 +218,7 @@ export default function Calendar() {
         date={selectedDate}
         events={
           selectedDate
-            ? events.filter((e) => e.date === selectedDate.toISOString().split("T")[0])
+            ? events.filter((e) => e.date === toDateStringISO(selectedDate))
             : []
         }
         onEditEvent={handleEventClick}

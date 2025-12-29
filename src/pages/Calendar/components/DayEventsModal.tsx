@@ -2,6 +2,7 @@ import { X, Plus, Clock, Edit2 } from "lucide-react";
 import type { CalendarEvent } from "../../../types/event";
 import { getColorValue } from "../../../types/event";
 import { Button } from "../../../components/Button";
+import { formatDateLongPtBr } from "../../../utils/date";
 
 interface DayEventsModalProps {
   isOpen: boolean;
@@ -22,12 +23,7 @@ export const DayEventsModal = ({
 }: DayEventsModalProps) => {
   if (!isOpen || !date) return null;
 
-  const formattedDate = new Intl.DateTimeFormat("pt-BR", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(date);
+  const formattedDate = date ? formatDateLongPtBr(date) : "";
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
