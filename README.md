@@ -1,73 +1,78 @@
-# React + TypeScript + Vite
+# MyCalendar App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 💻 Projeto
 
-Currently, two official plugins are available:
+O MyCalendar App é o frontend do sistema de calendário, desenvolvido em React + TypeScript + Vite. Permite ao usuário cadastrar, autenticar, criar, visualizar, editar e excluir eventos pessoais de forma simples e intuitiva. A aplicação se comunica com a MyCalendar API para todas as operações de backend, garantindo segurança e eficiência.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Integração total com o backend: [my-calendar-api](https://github.com/vitorbelarmino/my-calendar-api)
+- Experiência responsiva e fluida
+- Interface amigável, com navegação clara e feedback visual
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📝 Funcionalidades
 
-## Expanding the ESLint configuration
+- Cadastro e login de usuários
+- Autenticação JWT (com refresh)
+- Visualização de eventos em calendário
+- Criação, edição e exclusão de eventos
+- Listagem de eventos do usuário
+- Recuperação de dados do usuário autenticado
+- Logout seguro
+- Feedback visual para ações (modais, alerts)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tecnologias & Ferramentas
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React 18+
+- TypeScript
+- Vite
+- TailwindCSS
+- Context API (gerenciamento de auth)
+- Axios (requisições HTTP)
+- ESLint & Prettier
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## ⬇️ Como executar o projeto
+
+### Pré-requisitos
+
+- Node.js 18+
+- Backend rodando ([my-calendar-api](https://github.com/vitorbelarmino/my-calendar-api))
+
+### Passos
+
+```bash
+# Clone o repositório
+git clone https://github.com/vitorbelarmino/my-calendar-app.git
+cd my-calendar-app
+
+# Instale as dependências
+npm install
+
+# Configure o .env (baseado no .env.example)
+# Exemplo:
+VITE_API_URL=http://localhost:3333
+
+# Rode o projeto
+yarn dev # ou npm run dev
+
+# Acesse em http://localhost:5173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔗 Integração com Backend
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Todas as operações de usuário e eventos dependem do backend [my-calendar-api](https://github.com/vitorbelarmino/my-calendar-api)
+- Configure a variável VITE_API_URL para apontar para a URL da API
+
+---
+
+## 👤 Autor
+
+- GitHub: [https://github.com/vitorbelarmino](https://github.com/vitorbelarmino)
+- LinkedIn: [https://www.linkedin.com/in/vitor-belarmino/](https://www.linkedin.com/in/vitor-belarmino/)
+- Email: vitor.belarmino@hotmail.com
