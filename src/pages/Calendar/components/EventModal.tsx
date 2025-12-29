@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Trash2 } from "lucide-react";
-import type { CalendarEvent } from "../../../types/event";
+import type { IEvent, IEventDTO } from "../../../types/event";
 import { eventColors } from "../../../types/event";
 import TextField from "../../../components/TextField";
 import { Button } from "../../../components/Button";
@@ -12,9 +12,9 @@ import { formatDateLongPtBr, toDateStringISO } from "../../../utils/date";
 interface EventModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (event: Partial<CalendarEvent>) => void;
+  onSave: (event: IEventDTO & { id?: string }) => void;
   onDelete?: () => void;
-  event?: CalendarEvent | null;
+  event?: IEvent | null;
   selectedDate?: Date | null;
 }
 

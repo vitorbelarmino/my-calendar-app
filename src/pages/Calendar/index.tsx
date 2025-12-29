@@ -4,16 +4,16 @@ import { CalendarHeader } from "./components/CalendarHeader";
 import { EventModal } from "./components/EventModal";
 import { DayEventsModal } from "./components/DayEventsModal";
 import { ConfirmDialog } from "../../components/ConfirmDialog";
-import type { CalendarEvent } from "../../types/event";
+import type { IEvent, IEventDTO } from "../../types/event";
 import { eventsApi } from "../../services/api";
 import { showApiError } from "../../utils/apiError";
 import { toDateStringISO } from "../../utils/date";
 
 export default function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [events, setEvents] = useState<IEvent[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(null);
   const [loading, setLoading] = useState(true);
   const [showEventModal, setShowEventModal] = useState(false);
   const [showDayEventsModal, setShowDayEventsModal] = useState(false);
@@ -76,7 +76,7 @@ export default function Calendar() {
     }
   };
 
-  const handleEventClick = (event: CalendarEvent) => {
+  const handleEventClick = (event: IEvent) => {
     setSelectedEvent(event);
     setShowDayEventsModal(false);
     setShowEventModal(true);
@@ -94,15 +94,15 @@ export default function Calendar() {
     setShowEventModal(true);
   };
 
-  const handleSaveEvent = async (eventData: Partial<CalendarEvent>) => {
+  const handleSaveEvent = async (eventData: IEventDTO & { id?: string }) => {
     try {
       if (eventData.id) {
         const { data } = await eventsApi.update(eventData.id, {
-          title: eventData.title!,
-          description: eventData.description!,
-          date: eventData.date!,
-          hour: eventData.hour!,
-          themeColor: eventData.themeColor!,
+          title: eventData.title,
+          description: eventData.description,
+          date: eventData.date,
+          hour: eventData.hour,
+          themeColor: eventData.themeColor,
         });
         setEvents((prev) =>
           prev
@@ -115,11 +115,11 @@ export default function Calendar() {
         );
       } else {
         const { data } = await eventsApi.create({
-          title: eventData.title!,
-          description: eventData.description!,
-          date: eventData.date!,
-          hour: eventData.hour!,
-          themeColor: eventData.themeColor!,
+          title: eventData.title,
+          description: eventData.description,
+          date: eventData.date,
+          hour: eventData.hour,
+          themeColor: eventData.themeColor,
         });
         setEvents((prev) =>
           [...prev, data].sort((a, b) => {
@@ -216,11 +216,7 @@ export default function Calendar() {
         isOpen={showDayEventsModal}
         onClose={handleCloseDayEventsModal}
         date={selectedDate}
-        events={
-          selectedDate
-            ? events.filter((e) => e.date === toDateStringISO(selectedDate))
-            : []
-        }
+        events={selectedDate ? events.filter((e) => e.date === toDateStringISO(selectedDate)) : []}
         onEditEvent={handleEventClick}
         onCreateEvent={handleCreateEventFromDay}
       />

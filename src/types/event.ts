@@ -8,17 +8,6 @@ export type ThemeColor =
   | "orange"
   | "teal";
 
-export interface CalendarEvent {
-  id: string;
-  title: string;
-  description: string;
-  themeColor: ThemeColor;
-  date: string;
-  hour: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export const eventColors = [
   { name: "Blue", value: "#3B82F6", theme: "blue" as ThemeColor },
   { name: "Red", value: "#EF4444", theme: "red" as ThemeColor },
@@ -33,3 +22,16 @@ export const eventColors = [
 export const getColorValue = (theme: ThemeColor): string => {
   return eventColors.find((c) => c.theme === theme)?.value || "#3B82F6";
 };
+
+export interface IEvent {
+  id: string;
+  title: string;
+  description: string;
+  themeColor: ThemeColor;
+  date: string;
+  hour: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type IEventDTO = Omit<IEvent, "id" | "createdAt" | "updatedAt">;

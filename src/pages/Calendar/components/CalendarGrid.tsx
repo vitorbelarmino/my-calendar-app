@@ -1,14 +1,15 @@
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
-import { getColorValue, type CalendarEvent } from "../../../types/event";
+import { getColorValue } from "../../../types/event";
+import type { IEvent } from "../../../types/event";
 import { toDateStringISO, isToday, isSameMonth } from "../../../utils/date";
 
 interface CalendarGridProps {
   currentDate: Date;
   currentMonth: string;
   currentYear: number;
-  events: CalendarEvent[];
+  events: IEvent[];
   onDayClick: (date: Date) => void;
-  onEventClick: (event: CalendarEvent) => void;
+  onEventClick: (event: IEvent) => void;
   onPreviousMonth: () => void;
   onNextMonth: () => void;
   onToday: () => void;
@@ -38,6 +39,9 @@ export const CalendarGrid = ({
     const lastDay = new Date(year, month + 1, 0);
     const daysInMonth = lastDay.getDate();
     const startingDay = firstDay.getDay();
+
+    console.log(firstDay, lastDay);
+    console.log("daysInMonth", daysInMonth, "startingDay", startingDay);
 
     const days: Date[] = [];
 

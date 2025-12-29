@@ -1,5 +1,5 @@
 import { X, Plus, Clock, Edit2 } from "lucide-react";
-import type { CalendarEvent } from "../../../types/event";
+import type { IEvent } from "../../../types/event";
 import { getColorValue } from "../../../types/event";
 import { Button } from "../../../components/Button";
 import { formatDateLongPtBr } from "../../../utils/date";
@@ -8,8 +8,8 @@ interface DayEventsModalProps {
   isOpen: boolean;
   onClose: () => void;
   date: Date | null;
-  events: CalendarEvent[];
-  onEditEvent: (event: CalendarEvent) => void;
+  events: IEvent[];
+  onEditEvent: (event: IEvent) => void;
   onCreateEvent: () => void;
 }
 

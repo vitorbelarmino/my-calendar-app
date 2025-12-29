@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import type { IEvent, IEventDTO } from "../types/event";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3333";
 
@@ -47,19 +48,11 @@ api.interceptors.response.use(
 );
 
 export const eventsApi = {
-  getAll: () => api.get("/events"),
-  create: (event: {
-    title: string;
-    description: string;
-    date: string;
-    hour: string;
-    themeColor: string;
-  }) => api.post("/events", event),
-  update: (
-    id: string,
-    event: { title: string; description: string; date: string; hour: string; themeColor: string },
-  ) => api.put(`/events/${id}`, event),
-  delete: (id: string) => api.delete(`/events/${id}`),
+  getAll: (): Promise<{ data: IEvent[] }> => api.get("/events"),
+  create: (event: IEventDTO): Promise<{ data: IEvent }> => api.post("/events", event),
+  update: (id: string, event: IEventDTO): Promise<{ data: IEvent }> =>
+    api.put(`/events/${id}`, event),
+  delete: (id: string): Promise<void> => api.delete(`/events/${id}`),
 };
 
 export default api;
