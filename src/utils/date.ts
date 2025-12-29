@@ -17,10 +17,12 @@ export function isSameMonth(date: Date, ref: Date): boolean {
 export function formatDateLongPtBr(date: string | Date): string {
   let dateObj: Date;
   if (typeof date === "string") {
+    if (!date || date.trim() === "") return "";
     dateObj = new Date(date + (date.length === 10 ? "T00:00:00" : ""));
   } else {
     dateObj = date;
   }
+  if (isNaN(dateObj.getTime())) return "";
   return new Intl.DateTimeFormat("pt-BR", {
     weekday: "long",
     day: "numeric",

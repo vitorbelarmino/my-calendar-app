@@ -29,7 +29,7 @@ export const EventModal = ({
   const getInitialDate = () => {
     if (event) return event.date;
     if (selectedDate) return toDateStringISO(selectedDate);
-    return "";
+    return toDateStringISO(new Date());
   };
 
   const {
@@ -53,25 +53,34 @@ export const EventModal = ({
   const themeColor = watch("themeColor");
 
   useEffect(() => {
-    if (isOpen) {
-      if (event) {
-        reset({
-          title: event.title,
-          description: event.description,
-          date: event.date,
-          hour: event.hour,
-          themeColor: event.themeColor,
-        });
-      } else {
-        reset({
-          title: "",
-          description: "",
-          date: getInitialDate(),
-          hour: "",
-          themeColor: "blue",
-        });
-      }
+    if (!isOpen) return;
+    if (event) {
+      reset({
+        title: event.title,
+        description: event.description,
+        date: event.date,
+        hour: event.hour,
+        themeColor: event.themeColor,
+      });
+      return;
     }
+    if (selectedDate) {
+      reset({
+        title: "",
+        description: "",
+        date: toDateStringISO(selectedDate),
+        hour: "",
+        themeColor: "blue",
+      });
+      return;
+    }
+    reset({
+      title: "",
+      description: "",
+      date: toDateStringISO(new Date()),
+      hour: "",
+      themeColor: "blue",
+    });
   }, [isOpen, event, selectedDate, reset]);
 
   const onSubmit = async (data: EventFormData) => {
