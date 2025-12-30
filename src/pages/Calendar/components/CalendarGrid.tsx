@@ -121,7 +121,7 @@ export const CalendarGrid = ({
           ))}
         </div>
 
-        <div className="grid grid-cols-7 border-l border-t border-gray-200">
+        <div className="grid grid-cols-7 border-l border-t border-gray-400">
           {days.map((date) => {
             const dayEvents = getEventsForDate(date);
             const isTodayDate = isToday(date);
@@ -131,17 +131,18 @@ export const CalendarGrid = ({
               <div
                 key={date.toISOString()}
                 onClick={() => onDayClick(date)}
-                className={`
-                  aspect-square p-1 sm:p-2 cursor-pointer transition-colors
-                  hover:bg-gray-50 border-r border-b border-gray-200
-                  ${isTodayDate ? "bg-blue-50" : ""}
+                className={` aspect-square
+                  lg:aspect-[1.5/1] p-1 sm:p-2 cursor-pointer transition-colors
+                  border-r border-b border-gray-400
+                  ${isTodayDate ? "bg-blue-200" : ""}
+                  ${!isCurrentMonthDate ? "bg-gray-200 hover:bg-gray-300" : "hover:bg-gray-50"}
                 `}
               >
                 <div className="h-full flex flex-col">
                   <span
                     className={`
                       text-xs sm:text-sm font-medium
-                      ${isTodayDate ? "text-blue-600" : !isCurrentMonthDate ? "text-gray-300" : "text-gray-900"}
+                      ${isTodayDate ? "text-blue-600" : !isCurrentMonthDate ? "text-gray-500" : "text-gray-900"}
                     `}
                   >
                     {date.getDate()}
@@ -154,15 +155,21 @@ export const CalendarGrid = ({
                           e.stopPropagation();
                           onEventClick(event);
                         }}
-                        className="text-[10px] sm:text-xs px-1 py-0.5 rounded truncate text-white cursor-pointer hover:opacity-80 transition-opacity"
-                        style={{ backgroundColor: getColorValue(event.themeColor) }}
+                        className="text-[10px] sm:text-xs px-1 py-0.5 rounded truncate text-white cursor-pointer transition-opacity"
+                        style={{
+                          backgroundColor: getColorValue(event.themeColor),
+                          opacity: !isCurrentMonthDate ? 0.4 : 1,
+                        }}
                         title={event.title}
                       >
                         {event.title}
                       </div>
                     ))}
                     {dayEvents.length > 3 && (
-                      <div className="text-[10px] text-gray-500 px-1">
+                      <div
+                        style={{ opacity: !isCurrentMonthDate ? 0.4 : 1 }}
+                        className="text-[10px] text-gray-500 px-1"
+                      >
                         +{dayEvents.length - 3} mais
                       </div>
                     )}
