@@ -1,5 +1,4 @@
 import type React from "react";
-import { useEffect, useRef } from "react";
 import type { LucideIcon } from "lucide-react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
