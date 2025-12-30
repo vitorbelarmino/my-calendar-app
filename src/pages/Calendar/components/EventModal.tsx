@@ -32,6 +32,8 @@ export const EventModal = ({
     return toDateStringISO(new Date());
   };
 
+  const nowHour = new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+
   const {
     register,
     handleSubmit,
@@ -45,7 +47,7 @@ export const EventModal = ({
       title: "",
       description: "",
       date: getInitialDate(),
-      hour: "",
+      hour: nowHour,
       themeColor: "blue",
     },
   });
@@ -69,7 +71,7 @@ export const EventModal = ({
         title: "",
         description: "",
         date: toDateStringISO(selectedDate),
-        hour: "",
+        hour: nowHour,
         themeColor: "blue",
       });
       return;
@@ -78,7 +80,7 @@ export const EventModal = ({
       title: "",
       description: "",
       date: toDateStringISO(new Date()),
-      hour: "",
+      hour: nowHour,
       themeColor: "blue",
     });
   }, [isOpen, event, selectedDate, reset]);
