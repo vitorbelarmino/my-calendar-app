@@ -40,9 +40,6 @@ export const CalendarGrid = ({
     const daysInMonth = lastDay.getDate();
     const startingDay = firstDay.getDay();
 
-    console.log(firstDay, lastDay);
-    console.log("daysInMonth", daysInMonth, "startingDay", startingDay);
-
     const days: Date[] = [];
 
     const prevMonthLastDay = new Date(year, month, 0).getDate();
